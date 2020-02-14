@@ -1,26 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import { withRouter } from "react-router-dom";
+import Routes from './Utils/Routes';
 import './App.css';
 
 function App() {
+  const childProps = {
+      employeeInfo: "stuff"
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes childProps={childProps} />
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
