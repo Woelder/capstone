@@ -1,6 +1,7 @@
 import React from 'react';
+import Chat from '../../Comp/Chat';
 
 
 export default function Login(props) {
-    return (<div> <h1>LOGING PAGE HERer</h1></div>)
+    return (<div> <Chat props={props}></Chat></div>)
 }
