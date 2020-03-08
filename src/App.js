@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 
 
 
+
 let setup = firebase.initializeApp(fbcon); // this is what you use for firebase functionality
 //let fb = setup.database().ref('Groups/Group1/chat') 
 function App() {
