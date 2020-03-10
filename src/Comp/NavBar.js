@@ -31,7 +31,7 @@ const NavBar = props => {
 				<Collapse isOpen={isOpen} navbar>
 					<Nav navbar>
 						<NavItem>
-							<NavLink href="/components/">Components</NavLink>
+							<NavLink href="/pages/home.jsx">Home</NavLink>
 						</NavItem>
 						<NavItem>
 							<NavLink href="https://github.com/reactstrap/reactstrap">
