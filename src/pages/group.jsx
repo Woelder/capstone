@@ -3,6 +3,9 @@ import Chat from "../Comp/Chat";
 import queryString from "querystring";
 import { geolocated } from "react-geolocated";
 import NavBar from "../Comp/NavBar";
+import MapContainer from "../Comp/MapContainer";
+import { Table, Button } from "reactstrap";
+import "../App.css";
 
 export function group(props) {
 	let query = queryString.parse(props.location?.search.substring(1));
@@ -23,18 +26,6 @@ export function group(props) {
 					<td>longitude</td>
 					<td>{props.coords.longitude}</td>
 				</tr>
-				<tr>
-					<td>altitude</td>
-					<td>{props.coords.altitude}</td>
-				</tr>
-				<tr>
-					<td>heading</td>
-					<td>{props.coords.heading}</td>
-				</tr>
-				<tr>
-					<td>speed</td>
-					<td>{props.coords.speed}</td>
-				</tr>
 			</tbody>
 		</table>
 	) : (
@@ -43,17 +34,20 @@ export function group(props) {
 	return (
 		<div>
 			<NavBar></NavBar>
-			<h1>group</h1>
-			<table>
-				<td>
-					<tr> {geoDisplay}</tr>
-				</td>
-				<td>
-					<tr>
+			<h1>Group Name</h1>
+			<button class="filter">Filters</button>
+			<br></br>
+			<Table striped bordered hover variant="dark">
+				<tr>
+					<td> {geoDisplay}</td>
+
+					<td>
 						<Chat fireChat={fb} />
-					</tr>
-				</td>
-			</table>
+					</td>
+				</tr>
+			</Table>
+
+			<MapContainer></MapContainer>
 		</div>
 	);
 }
