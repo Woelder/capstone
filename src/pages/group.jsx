@@ -39,6 +39,10 @@ export function group(props) {
 			<br></br>
 			<Table striped bordered hover variant="dark">
 				<tr>
+					<th>Location Info</th>
+					<th>Chat</th>
+				</tr>
+				<tr>
 					<td> {geoDisplay}</td>
 
 					<td>
