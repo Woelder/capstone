@@ -1,7 +1,12 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 const ResturauntList = props => {
+
+	const [toReturn,setToReturn] = useState("empty");
+	const [first,toFirst] = useState("1")
 	const axios = require("axios");
+	if(first === "1"){
+		toFirst("2");
 	axios({
 		method: "GET",
 		url:
@@ -17,18 +22,14 @@ const ResturauntList = props => {
 			for (var i = 0; i < data.nearby_restaurants.length; i++) {
 				restaurantArray.push(data.nearby_restaurants[i].restaurant.name);
 				console.log(restaurantArray[i]);
-				return (
-					<div>
-						<h1>HI INSDIFR LOOP</h1>
-						<p>{restaurantArray[i]}</p>
-					</div>
-				);
+				
 			}
+			setToReturn(restaurantArray);
 		})
 		.catch(error => {
 			console.log(error);
 		});
-
-	return <div>OUTSIDE LOOP</div>;
+	}
+	return toReturn;
 };
 export default ResturauntList;

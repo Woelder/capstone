@@ -55,7 +55,7 @@ export function group(props) {
 				</tr>
 			</Table>
 
-			{/* <MapContainer></MapContainer> */}
+			{ <MapContainer></MapContainer> }
 		</div>
 	);
 }
