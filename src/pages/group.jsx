@@ -6,6 +6,7 @@ import NavBar from "../Comp/NavBar";
 import MapContainer from "../Comp/MapContainer";
 import { Table, Button } from "reactstrap";
 import "../App.css";
+import ResturauntList from "../Comp/ResturauntList";
 
 export function group(props) {
 	let query = queryString.parse(props.location?.search.substring(1));
@@ -48,10 +49,13 @@ export function group(props) {
 					<td>
 						<Chat fireChat={fb} />
 					</td>
+					<td>
+						<ResturauntList />
+					</td>
 				</tr>
 			</Table>
 
-			<MapContainer></MapContainer>
+			{/* <MapContainer></MapContainer> */}
 		</div>
 	);
 }
