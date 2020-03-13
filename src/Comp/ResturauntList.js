@@ -16,13 +16,7 @@ const ResturauntList = props => {
 			const restaurantArray = [];
 			for (var i = 0; i < data.nearby_restaurants.length; i++) {
 				restaurantArray.push(data.nearby_restaurants[i].restaurant.name);
-				console.log(restaurantArray[i]);
-				return (
-					<div>
-						<h1>HI INSDIFR LOOP</h1>
-						<p>{restaurantArray[i]}</p>
-					</div>
-				);
+				console.log("Logging:" + restaurantArray[i]);
 			}
 		})
 		.catch(error => {
