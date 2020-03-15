@@ -5,7 +5,7 @@ const ResturauntList = props => {
 	const [toReturn,setToReturn] = useState("empty");
 	const [first,toFirst] = useState("1")
 	const axios = require("axios");
-	if(first === "1"){
+	if(first === "1" && props.current === []){
 		toFirst("2");
 	axios({
 		method: "GET",
@@ -24,12 +24,14 @@ const ResturauntList = props => {
 				console.log(restaurantArray[i]);
 				
 			}
-			setToReturn(restaurantArray);
+			//setToReturn(restaurantArray);
+			props.set(restaurantArray);
 		})
 		.catch(error => {
 			console.log(error);
 		});
 	}
-	return toReturn;
+	
+	//return toReturn;
 };
 export default ResturauntList;

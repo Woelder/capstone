@@ -12,14 +12,7 @@ export class MapContainer extends Component {
 
 		this.state = {
 			//we will access the array of json object returned from zomato here and adds the points to the map as markers below.These are for testing
-			locationsOfResturaunts: [
-				{ lat: 47.49855629475769, lng: -122.14184416996333 },
-				{ latitude: 47.359423, longitude: -122.021071 },
-				{ latitude: 47.2052192687988, longitude: -121.988426208496 },
-				{ latitude: 47.6307081, longitude: -122.1434325 },
-				{ latitude: 47.3084488, longitude: -122.2140121 },
-				{ latitude: 47.5524695, longitude: -122.0425407 }
-			]
+			locationsOfResturaunts: props.resCoords
 		};
 	}
 
@@ -33,6 +26,7 @@ export class MapContainer extends Component {
 						lat: resturaunt.latitude,
 						lng: resturaunt.longitude
 					}}
+					title={resturaunt.name}
 					onClick={() => console.log("You clicked me!")} //make this launch a pop up with other resturaunt info from the json array
 				/>
 			);
@@ -43,9 +37,9 @@ export class MapContainer extends Component {
 		return (
 			<Map
 				google={this.props.google}
-				zoom={8}
+				zoom={14}
 				style={mapStyles}
-				initialCenter={{ lat: 47.444, lng: -122.176 }}
+				initialCenter={this.props.initCoords}
 			>
 				{this.displayMarkers()}
 			</Map>
@@ -53,5 +47,5 @@ export class MapContainer extends Component {
 	}
 }
 export default GoogleApiWrapper({
-	apiKey: "AIzaSyB6Fj7Zignal1k9LsqcgohvxW029LvwUG8"
+	apiKey: "BYBKEY"
 })(MapContainer);
