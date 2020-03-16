@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const ResturauntList = props => {
 
-	const [toReturn,setToReturn] = useState("empty");
 	const [first,toFirst] = useState("1")
 	const axios = require("axios");
 	if(first === "1" && props.current === []){

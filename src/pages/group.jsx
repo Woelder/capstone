@@ -4,15 +4,18 @@ import queryString from "querystring";
 import { geolocated } from "react-geolocated";
 import NavBar from "../Comp/NavBar";
 import MapContainer from "../Comp/MapContainer";
-import { Table, Button } from "reactstrap";
+import { Table } from "reactstrap";
 import "../App.css";
+import axios from 'axios'
+import  RestMap from "../Comp/locationGroup";
 
 export function Group(props) {
 
 	const [restaurants,setRestaurants] = useState("needCall");
-	const axios = require("axios");
 	let query = queryString.parse(props.location?.search.substring(1));
-	let fb = props.fire.database().ref("Groups/" + query.id + "/chat");
+	const fbChat = props.fire.database().ref("Groups/" + query.id + "/chat");
+	const fbLoc = props.fire.database().ref("Groups/" + query.id + "/Locations");
+	const fbRest = props.fire.database().ref("Groups/" + query.id + "/rest");
 
 	let geoDisplay = !props.isGeolocationAvailable ? (
 		<div>Your browser does not support Geolocation</div>
@@ -35,39 +38,6 @@ export function Group(props) {
 		<div>Getting the location data&hellip; </div>
 	);
 
-
-	if(restaurants === "needCall"){
-	axios({
-		method: "GET",
-		url:
-			"https://developers.zomato.com/api/v2.1/geocode?lat=35.308748099999995&lon=-80.74116819999999",
-		headers: {
-			"user-key": "15fc15cb049a5b5b668d903cdd986327",
-			"content-type": "Accept: application/json"
-		}
-	})
-		.then(response => {
-			var data = response.data;
-
-			setRestaurants(data);
-		})
-		.catch(error => {
-			console.log(error);
-		});}
-
-
-		let mapComp = [];
-		if(restaurants !== "needCall"){
-			let initCoords = {'lat': restaurants.location.latitude, 'lng': restaurants.location.longitude};
-			let resCoords = [];
-
-			restaurants.nearby_restaurants.forEach((rest) => {
-				resCoords.push({'latitude': rest.restaurant.location.latitude, 'longitude': rest.restaurant.location.longitude, 'name': rest.restaurant.name});
-			})
-
-			mapComp.push(<MapContainer initCoords={initCoords} resCoords={resCoords}/>);
-		}
-
 	return (
 		<div>
 			<NavBar></NavBar>
@@ -83,7 +53,7 @@ export function Group(props) {
 					<td> {geoDisplay}</td>
 
 					<td>
-						<Chat fireChat={fb} />
+						<Chat fireChat={fbChat} username={query.user} />
 					</td>
 					<td>
 					
@@ -91,7 +61,16 @@ export function Group(props) {
 				</tr>
 			</Table>
 
-			{mapComp}
+			
+			<RestMap
+			fireLoc={fbLoc}
+			fireRest={fbRest}
+			isGeolocationAvailable={props.isGeolocationAvailable}
+			isGeolocationEnabled={props.isGeolocationEnabled}
+			coords={props.coords}
+			/>
+
+			
 		</div>
 	);
 }

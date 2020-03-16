@@ -8,11 +8,6 @@ import {
 	Nav,
 	NavItem,
 	NavLink,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
-	NavbarText
 } from "reactstrap";
 
 const NavBar = props => {
@@ -24,7 +19,7 @@ const NavBar = props => {
 		<div>
 			<Navbar color="dark" dark>
 				<NavbarBrand href="/" className="mr-auto">
-					<img src={require("./images/capstone-small.png")} />
+					<img src={require("./images/capstone-small.png")} alt="logo" />
 					<br></br>Cuisine Coordinator
 				</NavbarBrand>
 				<NavbarToggler onClick={toggle} className="mr-2" />

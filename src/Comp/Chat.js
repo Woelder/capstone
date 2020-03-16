@@ -3,7 +3,7 @@ import * as _ from "lodash";
 
 export default function Chat(props) {
 	const [first, setFirst] = useState(true); //used for more efficent database conection. checks if first render or not
-
+	
 	const [msgValue, setMsgValue, msgRef] = useStateRef([]);
 	const [messageToSend, setMessageToSend] = useState("");
 
@@ -80,7 +80,7 @@ export default function Chat(props) {
 
 	const sendMessage = event => {
 		setMessageToSend("");
-		let jsonMsg = { Name: "Todd", Message: messageToSend }; //This add a message based on timestamp
+		let jsonMsg = { Name: props.username ?? "noName", Message: messageToSend }; //This add a message based on timestamp
 		props.fireChat.push().set(jsonMsg); //add completion callback to ensure message sent to clear or not clear the messageToSend
 	};
 
