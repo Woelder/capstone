@@ -42,6 +42,7 @@ export function group(props) {
 				<tr>
 					<th>Location Info</th>
 					<th>Chat</th>
+					<th>Restaurant List</th>
 				</tr>
 				<tr>
 					<td> {geoDisplay}</td>
@@ -55,7 +56,7 @@ export function group(props) {
 				</tr>
 			</Table>
 
-			{ <MapContainer></MapContainer> }
+			{<MapContainer></MapContainer>}
 		</div>
 	);
 }

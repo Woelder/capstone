@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-
+import { Modal } from "reactstrap";
 const mapStyles = {
 	width: "100%",
 	height: "50%"
@@ -33,7 +33,15 @@ export class MapContainer extends Component {
 						lat: resturaunt.latitude,
 						lng: resturaunt.longitude
 					}}
-					onClick={() => console.log("You clicked me!")} //make this launch a pop up with other resturaunt info from the json array
+					onClick={() =>
+						//make  a popup to show restaurant info based on an array of restaurants
+						console.log(
+							"You clicked marker at Lat: " +
+								resturaunt.latitude +
+								"and long: " +
+								resturaunt.longitude
+						)
+					} //make this launch a pop up with other resturaunt info from the json array
 				/>
 			);
 		});
@@ -53,5 +61,5 @@ export class MapContainer extends Component {
 	}
 }
 export default GoogleApiWrapper({
-	apiKey: "AIzaSyB6Fj7Zignal1k9LsqcgohvxW029LvwUG8"
+	apiKey: "AIzaSyAtmfFQwqUBpIWzo_y_IsUAvQ7fomnbBZM"
 })(MapContainer);
