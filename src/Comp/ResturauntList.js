@@ -4,7 +4,11 @@ const ResturauntList = props => {
 	const [toReturn, setToReturn] = useState("empty");
 	const [first, toFirst] = useState("1");
 	const axios = require("axios");
+<<<<<<< HEAD
 	if (first === "1") {
+=======
+	if(first === "1" && props.current === []){
+>>>>>>> 2de1e80e786fe831e3bfa73bc1f7255a12d17074
 		toFirst("2");
 		axios({
 			method: "GET",
@@ -14,6 +18,11 @@ const ResturauntList = props => {
 				"user-key": "15fc15cb049a5b5b668d903cdd986327",
 				"content-type": "Accept: application/json"
 			}
+<<<<<<< HEAD
+=======
+			//setToReturn(restaurantArray);
+			props.set(restaurantArray);
+>>>>>>> 2de1e80e786fe831e3bfa73bc1f7255a12d17074
 		})
 			.then(response => {
 				var data = response.data;
@@ -28,6 +37,7 @@ const ResturauntList = props => {
 				console.log(error);
 			});
 	}
-	return toReturn;
+	
+	//return toReturn;
 };
 export default ResturauntList;
