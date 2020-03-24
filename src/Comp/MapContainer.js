@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import { Modal } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
 const mapStyles = {
 	width: "100%",
 	height: "50%"
@@ -12,7 +13,11 @@ export class MapContainer extends Component {
 
 		this.state = {
 			//we will access the array of json object returned from zomato here and adds the points to the map as markers below.These are for testing
-			locationsOfResturaunts: props.resCoords
+			locationsOfResturaunts: props.resCoords,
+			showModal: true,
+			resLat: 12,
+			resLong: 12,
+			resName: "Harrys"
 		};
 	}
 
@@ -27,7 +32,14 @@ export class MapContainer extends Component {
 						lng: resturaunt.longitude
 					}}
 					title={resturaunt.name}
-					onClick={() => console.log("You clicked me!")} //make this launch a pop up with other resturaunt info from the json array
+					onClick={() => {
+						// this.setState({
+						// 	resName: resturaunt.name,
+						// 	resLat: resturaunt.latitude,
+						// 	resLong: resturaunt.longitude
+						// });
+						this.modalClicked();
+					}}
 				/>
 			);
 		});
@@ -35,15 +47,46 @@ export class MapContainer extends Component {
 
 	render() {
 		return (
-			<Map
-				google={this.props.google}
-				zoom={14}
-				style={mapStyles}
-				initialCenter={this.props.initCoords}
-			>
-				{this.displayMarkers()}
-			</Map>
+			<div>
+				<div>
+					<Map
+						google={this.props.google}
+						zoom={14}
+						style={mapStyles}
+						initialCenter={this.props.initCoords}
+					>
+						{this.displayMarkers()}
+					</Map>
+				</div>
+
+				<Modal show={this.state.showModal} onHide={this.close}>
+					<ModalHeader toggle={this.open()}>
+						<h1>Res Info</h1>
+					</ModalHeader>
+					<ModalBody>
+						<p>Name: {this.state.resName}</p>
+						<p>Lat: {this.state.resLat}</p>
+						<p>Long: {this.state.resLong}</p>
+					</ModalBody>
+					<ModalFooter>
+						<Button onClick={this.close}>Close</Button>
+					</ModalFooter>
+				</Modal>
+			</div>
 		);
+	}
+
+	modalClicked() {
+		this.setState({ showModal: true });
+		alert("modalCLicked");
+	}
+
+	close() {
+		this.setState({ showModal: false });
+	}
+
+	open() {
+		this.setState({ showModal: true });
 	}
 }
 export default GoogleApiWrapper({
