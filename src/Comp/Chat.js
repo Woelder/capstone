@@ -3,7 +3,7 @@ import * as _ from "lodash";
 
 export default function Chat(props) {
 	const [first, setFirst] = useState(true); //used for more efficent database conection. checks if first render or not
-	
+
 	const [msgValue, setMsgValue, msgRef] = useStateRef([]);
 	const [messageToSend, setMessageToSend] = useState("");
 

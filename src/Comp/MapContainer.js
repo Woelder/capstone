@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-
+import Popup from "reactjs-popup";
 const mapStyles = {
 	width: "100%",
 	height: "50%"
@@ -12,7 +12,11 @@ export class MapContainer extends Component {
 
 		this.state = {
 			//we will access the array of json object returned from zomato here and adds the points to the map as markers below.These are for testing
-			locationsOfResturaunts: props.resCoords
+			locationsOfResturaunts: props.resCoords,
+			showModal: true,
+			resLat: 12,
+			resLong: 12,
+			resName: "Harrys"
 		};
 	}
 
@@ -27,7 +31,9 @@ export class MapContainer extends Component {
 						lng: resturaunt.longitude
 					}}
 					title={resturaunt.name}
-					onClick={() => console.log("You clicked me!")} //make this launch a pop up with other resturaunt info from the json array
+					onClick={() => {
+						this.modalClicked(resturaunt);
+					}}
 				/>
 			);
 		});
@@ -35,17 +41,54 @@ export class MapContainer extends Component {
 
 	render() {
 		return (
-			<Map
-				google={this.props.google}
-				zoom={14}
-				style={mapStyles}
-				initialCenter={this.props.initCoords}
-			>
-				{this.displayMarkers()}
-			</Map>
+			<div>
+				<div>
+					<table>
+						<th>Resturaunt List</th>
+
+						{this.state.locationsOfResturaunts.map((res, index) => {
+							return (
+								<tr>
+									<td>
+										Resturaunt Name: {res.name}
+										<br></br>
+										Location: {res.city}
+										<br></br>
+									</td>
+								</tr>
+							);
+						})}
+					</table>
+
+					<Map
+						google={this.props.google}
+						zoom={14}
+						style={mapStyles}
+						initialCenter={this.props.initCoords}
+					>
+						{this.displayMarkers()}
+					</Map>
+				</div>
+			</div>
+		);
+	}
+
+	modalClicked(resturaunt) {
+		var name = resturaunt.name;
+		var city = resturaunt.city;
+		var phone = resturaunt.phone;
+		alert(name + "\n" + city + "\n" + phone);
+
+		//this return doesnt work AT ALL
+		return (
+			<div>
+				<Popup position="right center">
+					<div>Popup content here !!</div>
+				</Popup>
+			</div>
 		);
 	}
 }
 export default GoogleApiWrapper({
-	apiKey: "noKeyForYou"
+	apiKey: "keyHerePlz"
 })(MapContainer);
