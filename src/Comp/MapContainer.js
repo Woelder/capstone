@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-
+import Popup from "reactjs-popup";
 const mapStyles = {
 	width: "100%",
 	height: "50%"
@@ -33,12 +32,7 @@ export class MapContainer extends Component {
 					}}
 					title={resturaunt.name}
 					onClick={() => {
-						// this.setState({
-						// 	resName: resturaunt.name,
-						// 	resLat: resturaunt.latitude,
-						// 	resLong: resturaunt.longitude
-						// });
-						this.modalClicked();
+						this.modalClicked(resturaunt);
 					}}
 				/>
 			);
@@ -49,6 +43,23 @@ export class MapContainer extends Component {
 		return (
 			<div>
 				<div>
+					<table>
+						<th>Resturaunt List</th>
+
+						{this.state.locationsOfResturaunts.map((res, index) => {
+							return (
+								<tr>
+									<td>
+										Resturaunt Name: {res.name}
+										<br></br>
+										Location: {res.city}
+										<br></br>
+									</td>
+								</tr>
+							);
+						})}
+					</table>
+
 					<Map
 						google={this.props.google}
 						zoom={14}
@@ -58,37 +69,26 @@ export class MapContainer extends Component {
 						{this.displayMarkers()}
 					</Map>
 				</div>
-
-				<Modal show={this.state.showModal} onHide={this.close}>
-					<ModalHeader toggle={this.open()}>
-						<h1>Res Info</h1>
-					</ModalHeader>
-					<ModalBody>
-						<p>Name: {this.state.resName}</p>
-						<p>Lat: {this.state.resLat}</p>
-						<p>Long: {this.state.resLong}</p>
-					</ModalBody>
-					<ModalFooter>
-						<Button onClick={this.close}>Close</Button>
-					</ModalFooter>
-				</Modal>
 			</div>
 		);
 	}
 
-	modalClicked() {
-		this.setState({ showModal: true });
-		alert("modalCLicked");
-	}
+	modalClicked(resturaunt) {
+		var name = resturaunt.name;
+		var city = resturaunt.city;
+		var phone = resturaunt.phone;
+		alert(name + "\n" + city + "\n" + phone);
 
-	close() {
-		this.setState({ showModal: false });
-	}
-
-	open() {
-		this.setState({ showModal: true });
+		//this return doesnt work AT ALL
+		return (
+			<div>
+				<Popup position="right center">
+					<div>Popup content here !!</div>
+				</Popup>
+			</div>
+		);
 	}
 }
 export default GoogleApiWrapper({
-	apiKey: "AIzaSyAtmfFQwqUBpIWzo_y_IsUAvQ7fomnbBZM"
+	apiKey: "keyHerePlz"
 })(MapContainer);

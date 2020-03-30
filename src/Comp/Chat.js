@@ -80,7 +80,7 @@ export default function Chat(props) {
 
 	const sendMessage = event => {
 		setMessageToSend("");
-		let jsonMsg = { Name: "Todd", Message: messageToSend }; //This add a message based on timestamp
+		let jsonMsg = { Name: props.username ?? "noName", Message: messageToSend }; //This add a message based on timestamp
 		props.fireChat.push().set(jsonMsg); //add completion callback to ensure message sent to clear or not clear the messageToSend
 	};
 

@@ -23,7 +23,7 @@ const ResturauntList = props => {
 					console.log(restaurantArray[i]);
 				}
 				props.set(restaurantArray);
-				setToReturn(restaurantArray);
+				setToReturn(data);
 				return toReturn;
 			})
 			.catch(error => {
