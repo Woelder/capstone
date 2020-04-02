@@ -6,10 +6,10 @@ import { getCenter } from "geolib";
 
 //This is to replace elements on the screen that use location for more efficent rerenders
 export default function Location(props) {
-	const [toReturn, setToReturn] = useState("empty");
+
 	const [restaurants, setRestaurants] = useState("needCall");
 	const [locations, setLocations, locationsRef] = useStateRef("empty");
-	const restArray = ["rest1", "rest2"];
+
 	useEffect(() => {
 		if (
 			locations === "empty" &&
@@ -17,22 +17,40 @@ export default function Location(props) {
 			props.isGeolocationEnabled &&
 			props.coords
 		) {
-			props.fireLoc.push({
-				latitude: props.coords.latitude,
-				longitude: props.coords.longitude
-			});
-			props.fireLoc.on("child_added", function(snapshot) {
+			props.fireLoc.once("value").then(function(snapshot) {
 				let data = snapshot.val();
-				let toUpdateLoc = [];
-				if (locationsRef.current === "empty") {
-					toUpdateLoc.push(data); //needs to be in array format
-					setLocations(toUpdateLoc);
+				if(data === null){ //if creator of group this will be empty 
+					data = [];
 				} else {
-					toUpdateLoc = _.clone(locationsRef.current);
-					toUpdateLoc.push(data);
-					setLocations(toUpdateLoc);
+					data = Object.values(data);
 				}
-			});
+				
+				let toUpdateLoc = [];
+				
+				let lastIdInSnapshot = props.fireLoc.push({
+					latitude: props.coords.latitude,
+					longitude: props.coords.longitude
+				}).key;
+				data.push({ 
+					latitude: props.coords.latitude,
+					longitude: props.coords.longitude
+				});
+				props.fireLoc
+				.orderByKey()
+				.startAt(lastIdInSnapshot)
+				.limitToLast(1)
+				.on("child_added", function(newMessSnapShot) {
+					if (newMessSnapShot.key === lastIdInSnapshot) {
+						return;
+					}
+					let newData = newMessSnapShot.val();
+					toUpdateLoc = _.clone(locationsRef.current);
+					toUpdateLoc.push(newData);
+					setLocations(toUpdateLoc);
+				});
+				setLocations(data);
+			})
+
 		}
 	}, [
 		locations,
@@ -62,32 +80,26 @@ export default function Location(props) {
 					locationCenter.longitude +
 					"",
 				headers: {
-					"user-key": "15fc15cb049a5b5b668d903cdd986327",
+					"user-key": "e0537c1fa4f497bce67a21f601b7bcf4",
 					"content-type": "Accept: application/json"
 				}
 			})
 				.then(response => {
 					var data = response.data;
-					// var restArray = [];
+					 var restArray = [];
 					for (var i = 0; i < data.nearby_restaurants.length; i++) {
 						restArray.push(data.nearby_restaurants[i].restaurant.name);
 					}
-					setToReturn(restArray);
+				
 					data.locLength = locations.length;
 					setRestaurants(data);
-					return toReturn;
+				
 				})
 				.catch(error => {
 					console.log(error);
 				});
 		}
-	}, [
-		locations,
-		props.coords,
-		props.isGeolocationAvailable,
-		props.isGeolocationEnabled,
-		restaurants.locLength
-	]);
+	}, [locations, props.coords, props.isGeolocationAvailable, props.isGeolocationEnabled,restaurants.locLength]);
 
 	let mapComp = [];
 	if (restaurants !== "needCall") {
@@ -108,7 +120,7 @@ export default function Location(props) {
 		});
 
 		mapComp.push(
-			<MapContainer initCoords={initCoords} resCoords={resCoords} />
+			<MapContainer initCoords={initCoords} resCoords={resCoords} key={resCoords} />
 		);
 	}
 

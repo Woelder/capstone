@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import Popup from "reactjs-popup";
 const mapStyles = {
@@ -13,15 +13,11 @@ export class MapContainer extends Component {
 		this.state = {
 			//we will access the array of json object returned from zomato here and adds the points to the map as markers below.These are for testing
 			locationsOfResturaunts: props.resCoords,
-			showModal: true,
-			resLat: 12,
-			resLong: 12,
-			resName: "Harrys"
 		};
 	}
 
 	displayMarkers = () => {
-		return this.state.locationsOfResturaunts.map((resturaunt, index) => {
+		return this.props.resCoords.map((resturaunt, index) => {
 			return (
 				<Marker
 					key={index}
@@ -46,7 +42,7 @@ export class MapContainer extends Component {
 					<table>
 						<th>Resturaunt List</th>
 
-						{this.state.locationsOfResturaunts.map((res, index) => {
+						{this.props.resCoords.map((res, index) => {
 							return (
 								<tr>
 									<td>
@@ -90,5 +86,5 @@ export class MapContainer extends Component {
 	}
 }
 export default GoogleApiWrapper({
-	apiKey: "keyHerePlz"
+	apiKey: ""
 })(MapContainer);
