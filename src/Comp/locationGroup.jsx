@@ -115,7 +115,12 @@ export default function Location(props) {
 				longitude: rest.restaurant.location.longitude,
 				name: rest.restaurant.name,
 				phone: rest.restaurant.phone,
-				city: rest.restaurant.location.city
+				city: rest.restaurant.location.city,
+				address: rest.restaurant.location.address,
+				rating: rest.restaurant.user_rating.aggregate_rating,
+				ratingText: rest.restaurant.user_rating.rating_text,
+				menuLink: rest.restaurant.menu_url,
+				cuisines: rest.restaurant.cuisines
 			});
 		});
 
