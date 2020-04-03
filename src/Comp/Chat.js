@@ -1,17 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
+import { animateScroll } from "react-scroll";
 
 export default function Chat(props) {
 	const [first, setFirst] = useState(true); //used for more efficent database conection. checks if first render or not
 
 	const [msgValue, setMsgValue, msgRef] = useStateRef([]);
 	const [messageToSend, setMessageToSend] = useState("");
+	const messagesEndRef = useRef(null);
 
 	useEffect(() => {
 		const deleteMsg = event => {
 			props.fireChat.child(event.target.id).remove();
 		};
-
+		const scrollToBottom = () => {
+			animateScroll.scrollToBottom({
+				containerId: "chats"
+			  });
+		  };
 		if (first) {
 			//get init data here
 			props.fireChat.once("value").then(function(snapshot) {
@@ -38,9 +44,9 @@ export default function Chat(props) {
 									{" "}
 									{newData.Name} : {newData.Message}{" "}
 								</p>{" "}
-								<button id={newMessSnapShot.key} onClick={deleteMsg}>
+								{/* <button id={newMessSnapShot.key} onClick={deleteMsg}>
 									DELETE
-								</button>
+								</button> */}
 							</div>
 						); //key is for react, id will be for if we want to remove it from the database or update it
 						setMsgValue(toUpdatemessages);
@@ -62,9 +68,9 @@ export default function Chat(props) {
 								{" "}
 								{data[key].Name} : {data[key].Message}{" "}
 							</p>
-							<button id={key} onClick={deleteMsg}>
+							 {/* <button id={key} onClick={deleteMsg}>
 								DELETE
-							</button>
+							</button>  */}
 						</div>
 					);
 				});
@@ -72,6 +78,7 @@ export default function Chat(props) {
 			});
 			setFirst(false);
 		}
+		scrollToBottom()
 	}, [first, msgRef, props.fireChat, setMsgValue, msgValue]);
 
 	const updateMessageToSend = event => {
@@ -84,18 +91,21 @@ export default function Chat(props) {
 		props.fireChat.push().set(jsonMsg); //add completion callback to ensure message sent to clear or not clear the messageToSend
 	};
 
-	return (
-		<div style={{overflow: 'scroll', height: '250px', overflowAnchor:'auto'}}>
-			{msgValue}
-			<input
-			id="bottom"
-				type="text"
-				onChange={updateMessageToSend}
-				value={messageToSend}
-			></input>
 
-			<button onClick={sendMessage}>SEND</button>
+	return (
+		<div>
+		<div id="chats" style={{overflow: 'auto', height: '250px', overflowAnchor:'auto'}}>
+			{msgValue}
 		</div>
+		<input
+		placeholder="send Message"
+		type="text"
+		onChange={updateMessageToSend}
+		value={messageToSend}
+	></input>
+
+	<button onClick={sendMessage}>SEND</button>
+	</div>
 	);
 }
 
