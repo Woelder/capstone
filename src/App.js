@@ -5,7 +5,7 @@ import Routes from "./Utils/Routes";
 import "./App.css";
 import * as firebase from "firebase";
 export const fbcon = {
-	apiKey: "notTodaySatan",
+	apiKey: "AIzaSyDWgL4gjE-221TB_pxFHAWzKPYx2fbOUbI",
 	authDomain: "cuisine-coordinator.firebaseapp.com",
 	databaseURL: "https://cuisine-coordinator.firebaseio.com",
 	projectId: "cuisine-coordinator",

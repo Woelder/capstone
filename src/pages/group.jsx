@@ -39,7 +39,7 @@ export function Group(props) {
 	return (
 		<div>
 			<NavBar></NavBar>
-			<h1>Group Name</h1>
+			<h1>Group ID: {query.id}</h1>
 			<button class="filter">Filters</button>
 			<br></br>
 			<Table striped bordered hover variant="dark">
