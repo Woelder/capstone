@@ -85,9 +85,10 @@ export default function Chat(props) {
 	};
 
 	return (
-		<div>
+		<div style={{overflow: 'scroll', height: '250px', overflowAnchor:'auto'}}>
 			{msgValue}
 			<input
+			id="bottom"
 				type="text"
 				onChange={updateMessageToSend}
 				value={messageToSend}

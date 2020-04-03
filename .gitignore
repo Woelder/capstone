@@ -26,3 +26,4 @@ yarn-error.log*
 firebase.json
 src/firebase-credentials.jsx
 src/Comp/firebaseInit.js
+.firebase/hosting.YnVpbGQ.cache
