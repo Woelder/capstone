@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Chat from "../Comp/Chat";
 import queryString from "querystring";
-import { geolocated, geoPropTypes } from "react-geolocated";
+import { geolocated } from "react-geolocated";
 import NavBar from "../Comp/NavBar";
-import MapContainer from "../Comp/MapContainer";
 import { Table } from "reactstrap";
 import "../App.css";
-import axios from "axios";
 import RestMap from "../Comp/locationGroup";
-import ResturauntList from "../Comp/ResturauntList";
+
 
 export function Group(props) {
-	const [restaurants, setRestaurants] = useState("needCall");
+	
 	let query = queryString.parse(props.location?.search.substring(1));
 	const fbChat = props.fire.database().ref("Groups/" + query.id + "/chat");
 	const fbLoc = props.fire.database().ref("Groups/" + query.id + "/Locations");

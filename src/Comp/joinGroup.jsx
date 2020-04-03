@@ -1,4 +1,4 @@
-import React from "react";
+
 
 export default function joinGroup(props) {
 	//let newGroup = props.fire.database().ref('Groups/' + nanoid('2346789ABCDEFGHJKLMNPQRTUVWXYZ_abcdefghjklmnpqrtwxyz-', 10));

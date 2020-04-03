@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import * as _ from "lodash";
+import _ from "lodash";
 
 export default function Chat(props) {
 	const [first, setFirst] = useState(true); //used for more efficent database conection. checks if first render or not
