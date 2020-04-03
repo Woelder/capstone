@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import Popup from "reactjs-popup";
 const mapStyles = {
 	width: "100%",
-	height: "50%"
+	height: "75%"
 };
 
 export class MapContainer extends Component {
@@ -47,13 +47,28 @@ export class MapContainer extends Component {
 						<th>Resturaunt List</th>
 
 						{this.state.locationsOfResturaunts.map((res, index) => {
+							var url =
+								"https://www.google.com/maps/dir/?api=1&destination=" +
+								res.address;
 							return (
 								<tr>
 									<td>
 										Resturaunt Name: {res.name}
 										<br></br>
-										Location: {res.city}
-										<br></br>
+										Address:
+										{res.address}
+										<br />
+										Rating: {res.rating} ({res.ratingText})
+										<br />
+										Cuisine Type: {res.cuisines}
+										<br />
+										Menu: <a href={res.menuLink}>Link</a>
+										<br />
+										<button id="AsDownload">
+											<a href={url} target="_blank">
+												Navigate
+											</a>
+										</button>
 									</td>
 								</tr>
 							);
@@ -77,6 +92,7 @@ export class MapContainer extends Component {
 		var name = resturaunt.name;
 		var city = resturaunt.city;
 		var phone = resturaunt.phone;
+		var address = resturaunt.address;
 		alert(name + "\n" + city + "\n" + phone);
 
 		//this return doesnt work AT ALL
@@ -90,5 +106,5 @@ export class MapContainer extends Component {
 	}
 }
 export default GoogleApiWrapper({
-	apiKey: "keyHerePlz"
+	apiKey: "AIzaSyAtmfFQwqUBpIWzo_y_IsUAvQ7fomnbBZM"
 })(MapContainer);

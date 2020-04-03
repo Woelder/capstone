@@ -7,7 +7,7 @@ import {
 	NavbarBrand,
 	Nav,
 	NavItem,
-	NavLink,
+	NavLink
 } from "reactstrap";
 
 const NavBar = props => {
@@ -17,24 +17,22 @@ const NavBar = props => {
 
 	return (
 		<div>
-			<Navbar color="dark" dark>
+			<Navbar color="light" light>
 				<NavbarBrand href="/" className="mr-auto">
-					<img src={require("./images/capstone-small.png")} alt="logo" />
-					<br></br>Cuisine Coordinator
+					{/* <img src={require("./images/capstone-small.png")} alt="logo" /> */}
+					Cuisine Coordinator
 				</NavbarBrand>
-				<NavbarToggler onClick={toggle} className="mr-2" />
-				<Collapse isOpen={isOpen} navbar>
-					<Nav navbar>
-						<NavItem>
-							<NavLink href="/pages/home.jsx">Home</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="https://github.com/reactstrap/reactstrap">
-								GitHub
-							</NavLink>
-						</NavItem>
-					</Nav>
-				</Collapse>
+
+				<Nav navbar>
+					<NavItem>
+						<NavLink href="/pages/home.jsx">Home</NavLink>
+					</NavItem>
+				</Nav>
+				<Nav>
+					<NavItem>
+						<NavLink href="/pages/home.jsx">About</NavLink>
+					</NavItem>
+				</Nav>
 			</Navbar>
 		</div>
 	);
