@@ -6,7 +6,7 @@ import NavBar from "../Comp/NavBar";
 import { Table } from "reactstrap";
 import "../App.css";
 import RestMap from "../Comp/locationGroup";
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 export function Group(props) {
 	
@@ -40,7 +40,10 @@ export function Group(props) {
 		<div>
 			<NavBar></NavBar>
 			<h1>Group ID: {query.id}</h1>
-			<button class="filter">Filters</button>
+			<CopyToClipboard text={"cap.woe.dev/joinGroup?id=" + query.id}>
+			<button>Copy Link For Freinds</button>
+			</CopyToClipboard>
+			{/* <button class="filter">Filters</button> */}
 			<br></br>
 			<Table striped bordered hover variant="dark">
 				<tr>
