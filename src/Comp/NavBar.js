@@ -7,10 +7,10 @@ import {
 	NavbarBrand,
 	Nav,
 	NavItem,
-	NavLink
+	NavLink,
 } from "reactstrap";
 
-const NavBar = props => {
+const NavBar = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
@@ -19,7 +19,6 @@ const NavBar = props => {
 		<div>
 			<Navbar color="light" light>
 				<NavbarBrand href="/" className="mr-auto">
-					{/* <img src={require("./images/capstone-small.png")} alt="logo" /> */}
 					Cuisine Coordinator
 				</NavbarBrand>
 

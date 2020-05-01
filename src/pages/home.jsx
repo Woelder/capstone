@@ -18,8 +18,11 @@ export default function home(props) {
 
 			<div class="container">
 				<div class="jt">
-					<h2>Cuisine Coordinator</h2>
-					<h3>The easy way to meet and eat!</h3>
+					{/* <h2>Cuisine Coordinator</h2> */}
+					<img
+						src={require("../Comp/images/landing_page_logo.svg")}
+						alt="logo"
+					/>
 				</div>
 
 				<div class="buttonWrapper">
