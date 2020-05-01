@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import Popup from "reactjs-popup";
 const mapStyles = {
 	width: "100%",
-	height: "75%"
+	height: "75%",
 };
 
 export class MapContainer extends Component {
@@ -24,7 +24,7 @@ export class MapContainer extends Component {
 					id={index}
 					position={{
 						lat: resturaunt.latitude,
-						lng: resturaunt.longitude
+						lng: resturaunt.longitude,
 					}}
 					title={resturaunt.name}
 					onClick={() => {
@@ -42,14 +42,10 @@ export class MapContainer extends Component {
 					<table>
 						<th>Resturaunt List</th>
 
-<<<<<<< HEAD
 						{this.state.locationsOfResturaunts.map((res, index) => {
 							var url =
 								"https://www.google.com/maps/dir/?api=1&destination=" +
 								res.address;
-=======
-						{this.props.resCoords.map((res, index) => {
->>>>>>> 1805149fa59f85296da77737fbb3ddcd51de29ae
 							return (
 								<tr>
 									<td>
@@ -106,9 +102,5 @@ export class MapContainer extends Component {
 	}
 }
 export default GoogleApiWrapper({
-<<<<<<< HEAD
-	apiKey: "AIzaSyAtmfFQwqUBpIWzo_y_IsUAvQ7fomnbBZM"
-=======
-	apiKey: ""
->>>>>>> 1805149fa59f85296da77737fbb3ddcd51de29ae
+	apiKey: "nope",
 })(MapContainer);
