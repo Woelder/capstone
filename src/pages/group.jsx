@@ -41,7 +41,7 @@ export function Group(props) {
 			<NavBar></NavBar>
 			<h1>Group ID: {query.id}</h1>
 			<CopyToClipboard text={"cap.woe.dev/joinGroup?id=" + query.id}>
-			<button>Copy Link For Freinds</button>
+			<button>Copy Link For Friends</button>
 			</CopyToClipboard>
 			{/* <button class="filter">Filters</button> */}
 			<br></br>

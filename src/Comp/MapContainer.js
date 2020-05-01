@@ -58,7 +58,7 @@ export class MapContainer extends Component {
 										<br />
 										Cuisine Type: {res.cuisines}
 										<br />
-										Menu: <a href={res.menuLink}>Link</a>
+										Menu: <a href={res.menuLink} target="_blank">Link</a>
 										<br />
 										<button id="AsDownload">
 											<a href={url} target="_blank">
