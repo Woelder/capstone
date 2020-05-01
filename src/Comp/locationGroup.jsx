@@ -132,6 +132,8 @@ export default function Location(props) {
 	return (
 		<div>
 			<div>{mapComp}</div>
+	
+
 		</div>
 	);
 }
