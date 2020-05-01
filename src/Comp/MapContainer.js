@@ -41,13 +41,8 @@ export class MapContainer extends Component {
 				<div>
 					<table>
 						<th>Resturaunt List</th>
-<<<<<<< HEAD
 
 						{this.state.locationsOfResturaunts.map((res, index) => {
-=======
-							
-						{this.props.resCoords.map((res, index) => {
->>>>>>> bfde800e1da0607363f5acfa754ee1af7d5b5c04
 							var url =
 								"https://www.google.com/maps/dir/?api=1&destination=" +
 								res.address;
@@ -107,10 +102,6 @@ export class MapContainer extends Component {
 	}
 }
 export default GoogleApiWrapper({
-<<<<<<< HEAD
-	apiKey: "nope",
-=======
-	apiKey: "123"
->>>>>>> bfde800e1da0607363f5acfa754ee1af7d5b5c04
+	apiKey: ""
 })(MapContainer);
 
