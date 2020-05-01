@@ -94,6 +94,7 @@ MapContainer:table {
 	width: 50%;
 }
 .homePageButtons {
+	margin-top: 250px;
 	width: 200px;
 	height: 60px;
 	margin-right: 25px;
@@ -110,6 +111,10 @@ MapContainer:table {
 	position: absolute;
 	width: 100%;
 	height: 20%;
+}
+.jt img {
+	width: 400px;
+	height: 400px;
 }
 @keyframes App-logo-spin {
 	from {
